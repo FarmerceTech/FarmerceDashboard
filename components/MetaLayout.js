@@ -1,5 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
+import NextNProgress from 'nextjs-progressbar'
 // import NextNProgress from 'nextjs-progressbar'
 
 const MetaLayout = ({ title, description, children }) => {
@@ -29,7 +30,7 @@ const MetaLayout = ({ title, description, children }) => {
                 {children}
             </Head>
 
-            {/* <NextNProgress /> */}
+            <NextNProgress />
         </>
     )
 }

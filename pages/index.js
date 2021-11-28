@@ -67,3 +67,11 @@ export default function Home() {
     </div>
   )
 }
+export async function getServerSideProps(context) {
+  return {
+    redirect: {
+      permanent: false,
+      destination: "/login"
+    }
+  }
+}

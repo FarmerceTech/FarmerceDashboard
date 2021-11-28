@@ -10,12 +10,13 @@ import {
     MenuAlt2Icon
 } from '@heroicons/react/outline'
 import { useRouter } from "next/dist/client/router";
+import MetaLayout from "../components/MetaLayout";
 
 const navigation = [
     { name: 'Nursery List', href: '#', icon: HomeIcon, current: true },
 ]
 const userNavigation = [
-    { name: 'Logout', href: '#' },
+    { name: 'Logout', href: 'login' },
 ]
 const people = [
     { name: 'Jane Cooper', title: 'Regional Paradigm Technician', role: 'Admin', email: 'jane.cooper@example.com' },
@@ -31,14 +32,8 @@ export default function Example({ nurseries, totalPages, size, totalItems, pageN
 
     return (
         <>
-            {/*
-        This example requires updating your template:
 
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
+            <MetaLayout title="Nursery List" description={"Page Number " + pageNumber} />
             <div>
                 <Transition.Root show={sidebarOpen} as={Fragment}>
                     <Dialog as="div" className="fixed inset-0 flex z-40 md:hidden" onClose={setSidebarOpen}>

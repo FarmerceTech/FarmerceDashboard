@@ -70,24 +70,14 @@ const CustomDialog = ({ showDialog, setShowDialog, title, description }) => {
                                 <button
                                     type="button"
                                     className="shadow hover:shadow-xl active:shadow-sm bg-gray-400 rounded-full w-full h-full focus:outline-none duration-500 text-white bg-opacity-50 hover:bg-opacity-100"
-                                    onClick={() => setShowDialog(false)}
+                                    onClick={() => {
+                                        setShowDialog(false)
+                                    }}
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 p-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </button>
-                            </div>
-                            <div className="mt-5 sm:mt-4">
-                                <div className="text-center p-4 bg-green-400 text-lg font-medium text-white cursor-pointer bg-opacity-50 hover:bg-opacity-100 duration-500">
-                                    CLOSE
-                                </div>
-                                {/* <button
-                                    type="button"
-                                    className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
-                                    onClick={() => setShowDialog(false)}
-                                >
-                                    Close
-                                </button> */}
                             </div>
                         </div>
                     </Transition.Child>
