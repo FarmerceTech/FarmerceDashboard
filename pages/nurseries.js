@@ -13,7 +13,7 @@ import { useRouter } from "next/dist/client/router";
 import MetaLayout from "../components/MetaLayout";
 
 const navigation = [
-    { name: 'Nursery List', href: '#', icon: HomeIcon, current: true },
+    { name: 'Nursery List', href: '/nurseries', icon: HomeIcon, current: true },
 ]
 const userNavigation = [
     { name: 'Logout', href: 'login' },
@@ -218,6 +218,12 @@ export default function Example({ nurseries, totalPages, size, totalItems, pageN
                                                                 scope="col"
                                                                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                             >
+                                                                ID
+                                                            </th>
+                                                            <th
+                                                                scope="col"
+                                                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                            >
                                                                 Nursery Name
                                                             </th>
                                                             <th
@@ -250,6 +256,7 @@ export default function Example({ nurseries, totalPages, size, totalItems, pageN
                                                         {
                                                             nurseries.map(n => (
                                                                 <tr key={n.id}>
+                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{n.nId}</td>
                                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{n.name}</td>
                                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{n.admin.firstName + ' ' + n.admin.lastName}</td>
                                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{n.admin.phoneNumber}</td>
