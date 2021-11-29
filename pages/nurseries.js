@@ -26,7 +26,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Example({ nurseries, totalPages, size, totalItems, pageNumber }) {
+export default function Example({ nurseries, totalPages, size, totalItems, pageNumber, user }) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const router = useRouter()
 
@@ -57,7 +57,7 @@ export default function Example({ nurseries, totalPages, size, totalItems, pageN
                             leaveFrom="translate-x-0"
                             leaveTo="-translate-x-full"
                         >
-                            <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-indigo-700">
+                            <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-green-700">
                                 <Transition.Child
                                     as={Fragment}
                                     enter="ease-in-out duration-300"
@@ -113,13 +113,14 @@ export default function Example({ nurseries, totalPages, size, totalItems, pageN
                 {/* Static sidebar for desktop */}
                 <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
                     {/* Sidebar component, swap this element with another sidebar if you like */}
-                    <div className="flex flex-col flex-grow pt-5 bg-indigo-700 overflow-y-auto">
+                    <div className="flex flex-col flex-grow pt-5 bg-fgreen-700 overflow-y-auto">
                         <div className="flex items-center flex-shrink-0 px-4">
                             <img
-                                className="h-8 w-auto"
-                                src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
-                                alt="Workflow"
+                                className="h-16 w-auto"
+                                src="/img/logopng.png"
+                                alt="Farmerce"
                             />
+                            <div className="text-xl font-bold text-fgreen-900">DASHBOARD</div>
                         </div>
                         <div className="mt-5 flex-1 flex flex-col">
                             <nav className="flex-1 px-2 pb-4 space-y-1">
@@ -128,11 +129,11 @@ export default function Example({ nurseries, totalPages, size, totalItems, pageN
                                         key={item.name}
                                         href={item.href}
                                         className={classNames(
-                                            item.current ? 'bg-indigo-800 text-white' : 'text-indigo-100 hover:bg-indigo-600',
-                                            'group flex items-center px-2 py-2 text-sm font-medium rounded-md'
+                                            item.current ? 'bg-fgreen-800 hover:bg-fgreen-900' : 'text-fgreen-100 hover:bg-fgreen-600',
+                                            'uppercase  group flex items-center px-2 py-2 text-sm font-medium rounded-md  text-fgreen-200 hover:text-fgreen-100 duration-500'
                                         )}
                                     >
-                                        <item.icon className="mr-3 flex-shrink-0 h-6 w-6 text-indigo-300" aria-hidden="true" />
+                                        <item.icon className="mr-3 flex-shrink-0 h-6 w-6 " aria-hidden="true" />
                                         {item.name}
                                     </a>
                                 ))}
@@ -159,13 +160,20 @@ export default function Example({ nurseries, totalPages, size, totalItems, pageN
                                 {/* Profile dropdown */}
                                 <Menu as="div" className="ml-3 relative">
                                     <div>
-                                        <Menu.Button className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        <Menu.Button className="bg-white rounded-full flex text-sm border border-fgreen-100 hover:bg-fgreen-100 focus:bg-fgreen-100 active:bg-fgreen-100 duration-500 p-1">
                                             <span className="sr-only">Open user menu</span>
-                                            <img
+                                            {/* <img
                                                 className="h-8 w-8 rounded-full"
                                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                                 alt=""
-                                            />
+                                            /> */}
+                                            <svg className="text-fgreen-800" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" /></svg>
+                                            <div className="self-center px-2 text-fgreen-800 font-semibold">
+                                                {user.firstName + ' ' + user.lastName}
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 self-center mr-2 text-fgreen-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                            </svg>
                                         </Menu.Button>
                                     </div>
                                     <Transition
@@ -282,7 +290,7 @@ export default function Example({ nurseries, totalPages, size, totalItems, pageN
                                             }}>
                                                 <a>
                                                     <div
-                                                        className="p-2 bg-black bg-opacity-10 hover:bg-opacity-20 rounded-full duration-500 cursor-pointer text-indigo-700"
+                                                        className="p-2 bg-black bg-opacity-10 hover:bg-opacity-25 rounded-full duration-500 cursor-pointer text-fgreen-700"
 
                                                     >
                                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M14.71 6.71c-.39-.39-1.02-.39-1.41 0L8.71 11.3c-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L10.83 12l3.88-3.88c.39-.39.38-1.03 0-1.41z" /></svg>
@@ -302,7 +310,7 @@ export default function Example({ nurseries, totalPages, size, totalItems, pageN
                                                 }
                                             }}>
                                                 <a>
-                                                    <div className="p-2 bg-black bg-opacity-10 hover:bg-opacity-20 rounded-full duration-500 cursor-pointer text-indigo-700">
+                                                    <div className="p-2 bg-fgreen-900 bg-opacity-10 hover:bg-opacity-25 rounded-full duration-500 cursor-pointer text-fgreen-700">
                                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M9.29 6.71c-.39.39-.39 1.02 0 1.41L13.17 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01z" /></svg>
                                                     </div>
                                                 </a>
@@ -335,6 +343,18 @@ export async function getServerSideProps(context) {
     }
     console.log(access_token);
     const fetch = require('node-fetch');
+    const userResponse = await fetch('https://api.farmerce.in/user', {
+        method: 'get',
+        headers: {
+            'Authorization': 'Bearer ' + access_token
+        }
+    });
+    let user;
+    if (userResponse.status == 200) {
+        const userResponseJson = await userResponse.json()
+        console.log(userResponseJson)
+        user = userResponseJson
+    }
     const response = await fetch('https://api.farmerce.in/admin/nursery?sort=creationDate,Desc&page=' + (pageNumber - 1), {
         method: 'get',
         headers: {
@@ -350,7 +370,7 @@ export async function getServerSideProps(context) {
         console.log(pageNumber + ' ' + totalPages)
         return {
             props: {
-                nurseries, totalPages, size, totalItems, pageNumber
+                nurseries, totalPages, size, totalItems, pageNumber, user
             }
         }
     } else {

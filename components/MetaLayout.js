@@ -30,7 +30,7 @@ const MetaLayout = ({ title, description, children }) => {
                 {children}
             </Head>
 
-            <NextNProgress />
+            <NextNProgress color="#41c300" />
         </>
     )
 }
