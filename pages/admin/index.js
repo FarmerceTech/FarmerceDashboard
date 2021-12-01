@@ -10,10 +10,11 @@ import {
     MenuAlt2Icon
 } from '@heroicons/react/outline'
 import { useRouter } from "next/dist/client/router";
-import MetaLayout from "../components/MetaLayout";
+import MetaLayout from "../../components/MetaLayout";
 
 const navigation = [
-    { name: 'Nursery List', href: '/nurseries', icon: HomeIcon, current: true },
+    { name: 'Nursery List', href: '/nursery', icon: HomeIcon, current: false },
+    { name: 'Admin List', href: '/admin', icon: HomeIcon, current: true },
 ]
 const userNavigation = [
     { name: 'Logout', href: 'login' },
@@ -26,7 +27,7 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Example({ nurseries, totalPages, size, totalItems, pageNumber, user }) {
+export default function Nursery({ admins, totalPages, size, totalItems, pageNumber, user }) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const router = useRouter()
 
@@ -57,7 +58,7 @@ export default function Example({ nurseries, totalPages, size, totalItems, pageN
                             leaveFrom="translate-x-0"
                             leaveTo="-translate-x-full"
                         >
-                            <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-green-700">
+                            <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-fgreen-700">
                                 <Transition.Child
                                     as={Fragment}
                                     enter="ease-in-out duration-300"
@@ -80,10 +81,11 @@ export default function Example({ nurseries, totalPages, size, totalItems, pageN
                                 </Transition.Child>
                                 <div className="flex-shrink-0 flex items-center px-4">
                                     <img
-                                        className="h-8 w-auto"
-                                        src="https://tailwindui.com/img/logos/workflow-logo-indigo-300-mark-white-text.svg"
-                                        alt="Workflow"
+                                        className="h-16 w-auto"
+                                        src="/img/logopng.png"
+                                        alt="Farmerce"
                                     />
+                                    <div className="text-xl font-bold text-fgreen-900">DASHBOARD</div>
                                 </div>
                                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                                     <nav className="px-2 space-y-1">
@@ -92,11 +94,11 @@ export default function Example({ nurseries, totalPages, size, totalItems, pageN
                                                 key={item.name}
                                                 href={item.href}
                                                 className={classNames(
-                                                    item.current ? 'bg-indigo-800 text-white' : 'text-indigo-100 hover:bg-indigo-600',
-                                                    'group flex items-center px-2 py-2 text-base font-medium rounded-md'
+                                                    item.current ? 'bg-fgreen-800 hover:bg-fgreen-900' : 'text-fgreen-100 hover:bg-fgreen-600',
+                                                    'group flex items-center px-2 py-2 text-base font-medium rounded-md  text-fgreen-200 hover:text-fgreen-100 duration-500'
                                                 )}
                                             >
-                                                <item.icon className="mr-4 flex-shrink-0 h-6 w-6 text-indigo-300" aria-hidden="true" />
+                                                <item.icon className="mr-4 flex-shrink-0 h-6 w-6" aria-hidden="true" />
                                                 {item.name}
                                             </a>
                                         ))}
@@ -232,25 +234,19 @@ export default function Example({ nurseries, totalPages, size, totalItems, pageN
                                                                 scope="col"
                                                                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                             >
-                                                                Nursery Name
+                                                                First Name
                                                             </th>
                                                             <th
                                                                 scope="col"
                                                                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                             >
-                                                                Admin Name
+                                                                Last Name
                                                             </th>
                                                             <th
                                                                 scope="col"
                                                                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                             >
-                                                                Admin Phone Number
-                                                            </th>
-                                                            <th
-                                                                scope="col"
-                                                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                                                            >
-                                                                City
+                                                                Phone Number
                                                             </th>
                                                             <th
                                                                 scope="col"
@@ -262,14 +258,18 @@ export default function Example({ nurseries, totalPages, size, totalItems, pageN
                                                     </thead>
                                                     <tbody className="bg-white divide-y divide-gray-200">
                                                         {
-                                                            nurseries.map(n => (
-                                                                <tr key={n.id}>
-                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{n.nId}</td>
-                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{n.name}</td>
-                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{n.admin.firstName + ' ' + n.admin.lastName}</td>
-                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{n.admin.phoneNumber}</td>
-                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{n.address.city}</td>
-                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{moment(n.creationDate).format('DD MMM YYYY')}</td>
+                                                            admins.map(admin => (
+                                                                <tr key={admin.uId} className="cursor-pointer hover:bg-gray-200 duration-500" onClick={() => {
+                                                                    router.push({
+                                                                        // pathname: '/nursery/' + Buffer.from(n.nId.toString()).toString('base64'),
+                                                                        pathname: '/admin/' + admin.uId,
+                                                                    })
+                                                                }}>
+                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{admin.uId}</td>
+                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{admin.firstName}</td>
+                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{admin.lastName}</td>
+                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{'+91 ' + admin.phoneNumber}</td>
+                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{moment(admin.creationDate).format('DD MMM YYYY')}</td>
                                                                 </tr>
                                                             ))
                                                         }
@@ -283,7 +283,7 @@ export default function Example({ nurseries, totalPages, size, totalItems, pageN
                                     {
                                         (parseInt(pageNumber) - 1) >= 1 ?
                                             <Link href={{
-                                                pathname: '/nurseries',
+                                                pathname: '/nursery',
                                                 query: {
                                                     page: (parseInt(pageNumber) - 1),
                                                 }
@@ -304,7 +304,7 @@ export default function Example({ nurseries, totalPages, size, totalItems, pageN
                                     {
                                         (parseInt(pageNumber) + 1) <= totalPages ?
                                             <Link href={{
-                                                pathname: '/nurseries',
+                                                pathname: '/nursery',
                                                 query: {
                                                     page: (parseInt(pageNumber) + 1),
                                                 }
@@ -355,7 +355,7 @@ export async function getServerSideProps(context) {
         console.log(userResponseJson)
         user = userResponseJson
     }
-    const response = await fetch('https://api.farmerce.in/admin/nursery?sort=creationDate,Desc&page=' + (pageNumber - 1), {
+    const response = await fetch('https://api.farmerce.in/admin/nurseryAdmin?sort=creationDate,Desc&page=' + (pageNumber - 1), {
         method: 'get',
         headers: {
             'Authorization': 'Bearer ' + access_token
@@ -363,14 +363,14 @@ export async function getServerSideProps(context) {
     });
     if (response.status == 200) {
         const responseJson = await response.json()
-        const nurseries = responseJson._embedded != null ? responseJson._embedded.nurseryResourceList : [];
+        const admins = responseJson._embedded != null ? responseJson._embedded.userResourceList : [];
         const totalPages = responseJson.page != null ? responseJson.page.totalPages : 0
         const size = responseJson.page != null ? responseJson.page.size : 0
         const totalItems = responseJson.page != null ? responseJson.page.totalElements : 0
         console.log(pageNumber + ' ' + totalPages)
         return {
             props: {
-                nurseries, totalPages, size, totalItems, pageNumber, user
+                admins, totalPages, size, totalItems, pageNumber, user
             }
         }
     } else {

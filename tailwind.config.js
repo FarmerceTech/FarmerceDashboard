@@ -4,7 +4,6 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-
       colors: {
         fgreen: {
           50: '#F1F8E9',
@@ -23,6 +22,22 @@ module.exports = {
           A700: '#64DD17',
         },
       },
+      keyframes: {
+        move: {
+          '0%, 100%': { transform: 'translateX(0px)' },
+          '25%': { transform: 'translateX(3px)' },
+          '75%': { transform: 'translateX(-3px)' },
+        },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(0deg)' },
+          '25%': { transform: 'rotate(5deg)' },
+          '75%': { transform: 'rotate(-5deg)' },
+        }
+      },
+      animation: {
+        pulse: 'move 500ms ease-in-out infinite',
+        wiggle: 'wiggle 500ms ease-in-out infinite',
+      }
     },
   },
   variants: {
