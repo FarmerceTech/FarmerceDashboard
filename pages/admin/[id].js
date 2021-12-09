@@ -165,11 +165,11 @@ export default function Nursery({ user, admin, nurseries }) {
                                             </div>
                                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                                 <dt className="text-sm font-medium text-gray-500">Joined On</dt>
-                                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{moment(admin.creationDate).format('hh:mm A DD MMM YYYY')}</dd>
+                                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{moment(admin.creationDate).format('hh:mm A, DD MMM YYYY')}</dd>
                                             </div>
                                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                                 <dt className="text-sm font-medium text-gray-500">Last Active On</dt>
-                                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{moment(admin.lastActive).format('hh:mm A DD MMM YYYY')}</dd>
+                                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{moment(admin.lastActive).format('hh:mm A, DD MMM YYYY')}</dd>
                                             </div>
                                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                                 <dt className="text-sm font-medium text-gray-500">Nursery</dt>
