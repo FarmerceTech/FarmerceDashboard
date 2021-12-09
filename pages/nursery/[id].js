@@ -56,6 +56,7 @@ export default function Nursery({ user, nursery, token }) {
         })
         console.log(response)
         setLoadingDialog(false)
+        router.back()
     }
     return (
         <>
