@@ -11,6 +11,7 @@ import {
 import { useRouter } from "next/dist/client/router";
 import MetaLayout from "../../components/MetaLayout";
 import NavigationLayout from "../../components/NavigationLayout";
+import LoadingDialog from "../../components/dialog/LoadingDialog";
 
 const navigation = [
     { name: 'Nursery List', href: '/nursery', icon: HomeIcon, current: true },
@@ -37,10 +38,25 @@ function getNurseryType(type) {
     }
 }
 
-export default function Nursery({ user, nursery }) {
-    const [sidebarOpen, setSidebarOpen] = useState(false)
-    const router = useRouter()
 
+
+export default function Nursery({ user, nursery, token }) {
+    const [sidebarOpen, setSidebarOpen] = useState(false)
+    const [loadingDialog, setLoadingDialog] = useState(false)
+    const router = useRouter()
+    const deleteNursery = async () => {
+        setLoadingDialog(true)
+        console.log('Delete')
+        const fetch = require('node-fetch')
+        const response = await fetch('https://api.farmerce.in/nursery/' + nursery.nId, {
+            method: 'delete',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        console.log(response)
+        setLoadingDialog(false)
+    }
     return (
         <>
 
@@ -277,6 +293,26 @@ export default function Nursery({ user, nursery }) {
                                                     </ul>
                                                 </dd>
                                             </div>
+
+                                            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                                <dt className="text-sm font-medium text-gray-500"></dt>
+                                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                                                    <ul role="list" className="border border-gray-200 rounded-md divide-y divide-gray-200">
+                                                        <li >
+                                                            <a onClick={() => {
+                                                                deleteNursery()
+                                                            }} className="group pl-3 pr-4 py-3 flex items-center justify-between text-sm hover:bg-red-200 cursor-pointer duration-500">
+                                                                <div className="w-0 flex-1 flex items-center">
+                                                                    <span className="ml-2 flex-1 w-0 truncate">DELETE</span>
+                                                                </div>
+                                                                <div className="ml-4 flex-shrink-0 flex text-red-700 group-hover:text-red-900 duration-500 group-hover:animate-pulse">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" /></svg>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </dd>
+                                            </div>
                                         </dl>
                                     </div>
                                 </div>
@@ -287,6 +323,7 @@ export default function Nursery({ user, nursery }) {
                 </div>
             </div>
             {/* <NextScript /> */}
+            <LoadingDialog showDialog={loadingDialog} setShowDialog={setLoadingDialog} />
         </>
     )
 }
@@ -324,7 +361,7 @@ export async function getServerSideProps(context) {
         const nursery = await response.json()
         return {
             props: {
-                user, nursery
+                user, nursery, token: access_token
             }
         }
     } else {
