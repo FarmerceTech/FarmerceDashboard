@@ -147,6 +147,12 @@ export default function Nursery({ admins, totalPages, size, totalItems, pageNumb
                                                                 scope="col"
                                                                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                                             >
+                                                                Last Active
+                                                            </th>
+                                                            <th
+                                                                scope="col"
+                                                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                                            >
                                                                 Onboarding Date
                                                             </th>
                                                         </tr>
@@ -163,6 +169,7 @@ export default function Nursery({ admins, totalPages, size, totalItems, pageNumb
                                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 capitalize">{admin.firstName}</td>
                                                                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 capitalize">{admin.lastName}</td>
                                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{'+91 ' + admin.phoneNumber}</td>
+                                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{moment(admin.lastActive).format('hh:mm DD MMM YYYY')}</td>
                                                                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{moment(admin.creationDate).format('DD MMM YYYY')}</td>
                                                                 </tr>
                                                             ))
