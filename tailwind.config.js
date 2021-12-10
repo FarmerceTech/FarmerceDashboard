@@ -32,11 +32,17 @@ module.exports = {
           '0%, 100%': { transform: 'rotate(0deg)' },
           '25%': { transform: 'rotate(5deg)' },
           '75%': { transform: 'rotate(-5deg)' },
+        },
+        scale: {
+          '0%, 100%': { transform: 'scale(1)' },
+          '25%': { transform: 'scale(1.1)' },
+          '75%': { transform: 'scale(.9)' },
         }
       },
       animation: {
         pulse: 'move 500ms ease-in-out infinite',
         wiggle: 'wiggle 500ms ease-in-out infinite',
+        scale: 'scale 500ms ease-in-out infinite'
       }
     },
   },

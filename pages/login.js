@@ -24,7 +24,7 @@ export default function Login() {
             setShowDialog(true)
         } else {
             router.push({
-                pathname: router?.query?.redirect ? router?.query?.redirect : '/nursery',
+                pathname: router?.query?.redirect ? router?.query?.redirect : '/dashboard',
             })
         }
         setLoadingDialog(false)

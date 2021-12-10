@@ -31,14 +31,15 @@ const stats = [
     { name: 'Total Subscribers', stat: '71,897', previousStat: '70,946', change: '12%', changeType: 'increase' },
     { name: 'Total Invoices', stat: '58.16%', previousStat: '56.14%', change: '2.02%', changeType: 'increase' },
     { name: 'Total Pending Advance Slip', stat: '24.57%', previousStat: '28.62%', change: '4.05%', changeType: 'decrease' },
+    { name: 'Total Pending Advance Slip', stat: '24.57%', previousStat: '28.62%', change: '4.05%', changeType: 'decrease' },
 ]
-export default function Nursery({ admins, totalPages, size, totalItems, pageNumber, user }) {
+export default function Nursery({ dashboard, user }) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const router = useRouter()
 
     return (
         <>
-            <MetaLayout title="Nursery List" description={"Page Number " + pageNumber} />
+            <MetaLayout title="Dashboard" description={"Dashboard"} />
             <div>
                 <NavigationLayout index="1" sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
                 <div className="md:pl-64 flex flex-col flex-1">
@@ -111,41 +112,97 @@ export default function Nursery({ admins, totalPages, size, totalItems, pageNumb
                             <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                                 {/* Replace with your content */}
                                 <div>
-                                    {/* <h3 className="text-lg leading-6 font-medium text-gray-900">Last 30 days</h3> */}
-                                    <dl className="grid grid-cols-1 rounded-lg bg-white overflow-hidden shadow divide-y divide-gray-200 md:grid-cols-3 md:divide-y-0 md:divide-x">
-                                        {stats.map((item) => (
-                                            <div key={item.name} className="px-4 py-5 sm:p-6">
-                                                <dt className="text-base font-normal text-gray-900">{item.name}</dt>
-                                                <dd className="mt-1 flex justify-between items-baseline md:block lg:flex">
-                                                    <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
-                                                        {item.stat}
-                                                        <span className="ml-2 text-sm font-medium text-gray-500">from {item.previousStat}</span>
-                                                    </div>
 
+                                    <dl className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                                        <div
+                                            key="Total Nurseries"
+                                            className="relative bg-white pt-5 px-4 pb-5 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
+                                            <dt className="text-base font-normal text-gray-900">Total Nurseries</dt>
+                                            <dd className="mt-1 flex justify-between items-baseline md:block lg:flex">
+                                                <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
+                                                    {dashboard.nurseryCount}
+                                                </div>
+                                                {
+                                                    dashboard.nurseriesAddedToday > 0 ?
+                                                        <div
+                                                            className='inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium md:mt-2 lg:mt-0 bg-green-100 text-green-800'>
+                                                            <svg className="-ml-1 mr-0.5 flex-shrink-0 self-center h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M13 19V7.83l4.88 4.88c.39.39 1.03.39 1.42 0 .39-.39.39-1.02 0-1.41l-6.59-6.59c-.39-.39-1.02-.39-1.41 0l-6.6 6.58c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L11 7.83V19c0 .55.45 1 1 1s1-.45 1-1z" /></svg>
+                                                            <span className="sr-only">Increased by</span>
+                                                            {dashboard.nurseriesAddedToday}
+                                                        </div> : <></>
+                                                }
+
+                                            </dd>
+                                        </div>
+                                        <div
+                                            key="Total Nursery Owners"
+                                            className="relative bg-white pt-5 px-4 pb-5 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
+                                            <dt className="text-base font-normal text-gray-900">Total Nursery Owners</dt>
+                                            <dd className="mt-1 flex justify-between items-baseline md:block lg:flex">
+                                                <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
+                                                    {dashboard.ownersCount}
+                                                </div>
+                                                {
+                                                    dashboard.ownersAddedToday > 0 ?
+                                                        <div
+                                                            className='inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium md:mt-2 lg:mt-0 bg-green-100 text-green-800'>
+                                                            <svg className="-ml-1 mr-0.5 flex-shrink-0 self-center h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M13 19V7.83l4.88 4.88c.39.39 1.03.39 1.42 0 .39-.39.39-1.02 0-1.41l-6.59-6.59c-.39-.39-1.02-.39-1.41 0l-6.6 6.58c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L11 7.83V19c0 .55.45 1 1 1s1-.45 1-1z" /></svg>
+                                                            <span className="sr-only">Increased by</span>
+                                                            {dashboard.ownersAddedToday}
+                                                        </div> : <></>
+                                                }
+
+                                            </dd>
+                                        </div>
+                                        <div
+                                            key="Total Active Owners"
+                                            className="relative bg-white pt-5 px-4 pb-5 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
+                                            <dt className="text-base font-normal text-gray-900">Total Active Owners</dt>
+                                            <dd className="mt-1 flex justify-between items-baseline md:block lg:flex">
+                                                <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
+                                                    {dashboard.todayActiveOwners}
+                                                </div>
+                                            </dd>
+                                        </div>
+                                        <div
+                                            key="Invoices"
+                                            className="relative bg-white pt-5 px-4 pb-5 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
+                                            <dt className="text-base font-normal text-gray-900">Invoices</dt>
+                                            <dd className="mt-1 flex justify-between items-baseline md:block lg:flex">
+                                                <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
+                                                    {dashboard.completeInvoiceCount}
+                                                </div>
+                                                {dashboard.todaysCompletedInvoicesCount > 0 ?
                                                     <div
-                                                        className={classNames(
-                                                            item.changeType === 'increase' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800',
-                                                            'inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium md:mt-2 lg:mt-0'
-                                                        )}
-                                                    >
-                                                        {item.changeType === 'increase' ? (
-                                                            <ArrowSmUpIcon
-                                                                className="-ml-1 mr-0.5 flex-shrink-0 self-center h-5 w-5 text-green-500"
-                                                                aria-hidden="true"
-                                                            />
-                                                        ) : (
-                                                            <ArrowSmDownIcon
-                                                                className="-ml-1 mr-0.5 flex-shrink-0 self-center h-5 w-5 text-red-500"
-                                                                aria-hidden="true"
-                                                            />
-                                                        )}
+                                                        className='inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium md:mt-2 lg:mt-0 bg-green-100 text-green-800'>
+                                                        <svg className="-ml-1 mr-0.5 flex-shrink-0 self-center h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M13 19V7.83l4.88 4.88c.39.39 1.03.39 1.42 0 .39-.39.39-1.02 0-1.41l-6.59-6.59c-.39-.39-1.02-.39-1.41 0l-6.6 6.58c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L11 7.83V19c0 .55.45 1 1 1s1-.45 1-1z" /></svg>
+                                                        <span className="sr-only">Increased by</span>
+                                                        {dashboard.todaysCompletedInvoicesCount}
+                                                    </div> : <></>
+                                                }
 
-                                                        <span className="sr-only">{item.changeType === 'increase' ? 'Increased' : 'Decreased'} by</span>
-                                                        {item.change}
-                                                    </div>
-                                                </dd>
-                                            </div>
-                                        ))}
+                                            </dd>
+                                        </div>
+                                        <div
+                                            key="Advance Slip"
+                                            className="relative bg-white pt-5 px-4 pb-5 sm:pt-6 sm:px-6 shadow rounded-lg overflow-hidden">
+                                            <dt className="text-base font-normal text-gray-900">Advance Slip</dt>
+                                            <dd className="mt-1 flex justify-between items-baseline md:block lg:flex">
+                                                <div className="flex items-baseline text-2xl font-semibold text-indigo-600">
+                                                    {dashboard.pendingAdvanceSlipCount}
+                                                </div>
+                                                {
+                                                    dashboard.todaysPendingAdvanceSlipCount > 0 ?
+                                                        <div
+                                                            className='inline-flex items-baseline px-2.5 py-0.5 rounded-full text-sm font-medium md:mt-2 lg:mt-0 bg-green-100 text-green-800'>
+                                                            <svg className="-ml-1 mr-0.5 flex-shrink-0 self-center h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M13 19V7.83l4.88 4.88c.39.39 1.03.39 1.42 0 .39-.39.39-1.02 0-1.41l-6.59-6.59c-.39-.39-1.02-.39-1.41 0l-6.6 6.58c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L11 7.83V19c0 .55.45 1 1 1s1-.45 1-1z" /></svg>
+                                                            <span className="sr-only">Increased by</span>
+                                                            {dashboard.todaysPendingAdvanceSlipCount}
+                                                        </div> : <></>
+                                                }
+
+                                            </dd>
+                                        </div>
                                     </dl>
                                 </div>
                                 {/* /End replace */}
@@ -159,8 +216,6 @@ export default function Nursery({ admins, totalPages, size, totalItems, pageNumb
 }
 export async function getServerSideProps(context) {
     const { access_token } = cookies(context)
-    const pageNumber = context.query.page ? context.query.page : 1;
-    console.log(pageNumber)
     if (access_token == null || access_token == '') {
         return {
             redirect: {
@@ -169,7 +224,6 @@ export async function getServerSideProps(context) {
             }
         }
     }
-    console.log(access_token);
     const fetch = require('node-fetch');
     const userResponse = await fetch('https://api.farmerce.in/user', {
         method: 'get',
@@ -183,22 +237,19 @@ export async function getServerSideProps(context) {
         console.log(userResponseJson)
         user = userResponseJson
     }
-    const response = await fetch('https://api.farmerce.in/admin/nurseryAdmin?sort=creationDate,Desc&page=' + (pageNumber - 1), {
+    const response = await fetch('https://api.farmerce.in/admin/dashboard', {
         method: 'get',
         headers: {
             'Authorization': 'Bearer ' + access_token
         }
     });
     if (response.status == 200) {
-        const responseJson = await response.json()
-        const admins = responseJson._embedded != null ? responseJson._embedded.userResourceList : [];
-        const totalPages = responseJson.page != null ? responseJson.page.totalPages : 0
-        const size = responseJson.page != null ? responseJson.page.size : 0
-        const totalItems = responseJson.page != null ? responseJson.page.totalElements : 0
-        console.log(pageNumber + ' ' + totalPages)
+        const dashboard = await response.json()
+
+        console.log(dashboard)
         return {
             props: {
-                admins, totalPages, size, totalItems, pageNumber, user
+                dashboard, user
             }
         }
     } else {

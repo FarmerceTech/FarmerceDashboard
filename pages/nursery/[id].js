@@ -43,6 +43,7 @@ function getNurseryType(type) {
 export default function Nursery({ user, nursery, token }) {
     const [sidebarOpen, setSidebarOpen] = useState(false)
     const [loadingDialog, setLoadingDialog] = useState(false)
+    const [name, setName] = useState(nursery.name);
     const router = useRouter()
     const deleteNursery = async () => {
         setLoadingDialog(true)
@@ -57,6 +58,17 @@ export default function Nursery({ user, nursery, token }) {
         console.log(response)
         setLoadingDialog(false)
         router.back()
+    }
+    const updateNursery = async () => {
+        setLoadingDialog(true)
+        const fetch = require('node-fetch')
+        const response = await fetch('https://api.farmerce.in/admin/nursery/' + nursery.nId + '?name=' + name, {
+            method: 'put',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        })
+        setLoadingDialog(false)
     }
     return (
         <>
@@ -147,11 +159,11 @@ export default function Nursery({ user, nursery, token }) {
                                                 <dt className="text-sm font-medium text-gray-500">Nursery Id</dt>
                                                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{nursery.nId}</dd>
                                             </div>
-                                            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                            {/* <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                                 <dt className="text-sm font-medium text-gray-500">Nursery Name</dt>
                                                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 capitalize">{nursery.name}</dd>
-                                            </div>
-                                            {/* <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                            </div> */}
+                                            <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                                 <dt className="text-sm font-medium text-gray-500">Nursery Name</dt>
                                                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 capitalize">
                                                     <input
@@ -159,10 +171,11 @@ export default function Nursery({ user, nursery, token }) {
                                                         id="name"
                                                         name="name"
                                                         type='text'
+                                                        onChange={(e) => setName(e.target.value)}
                                                         className="rounded-full bg-gray-100 px-4 py-2 pr-14 text-sm w-full outline-none border focus:border-fgreen-700 duration-500"
                                                     />
                                                 </dd>
-                                            </div> */}
+                                            </div>
                                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                                 <dt className="text-sm font-medium text-gray-500">Nursery Type</dt>
                                                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{getNurseryType(nursery.type)}</dd>
@@ -269,7 +282,7 @@ export default function Nursery({ user, nursery, token }) {
                                                                         <span className="ml-2 flex-1 w-0 truncate font-medium text-fgreen-700 group-hover:text-fgreen-900 duration-500">View Nursery Owner</span>
                                                                     </div>
                                                                     <div className="ml-4 flex-shrink-0 flex text-fgreen-700 group-hover:text-fgreen-900 duration-500 group-hover:animate-pulse">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M9.31 6.71c-.39.39-.39 1.02 0 1.41L13.19 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.72 6.7c-.38-.38-1.02-.38-1.41.01z" /></svg>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M5 13h11.17l-4.88 4.88c-.39.39-.39 1.03 0 1.42.39.39 1.02.39 1.41 0l6.59-6.59c.39-.39.39-1.02 0-1.41l-6.58-6.6c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L16.17 11H5c-.55 0-1 .45-1 1s.45 1 1 1z" /></svg>
                                                                     </div>
                                                                 </a>
                                                             </Link>
@@ -288,7 +301,7 @@ export default function Nursery({ user, nursery, token }) {
                                                                     <span className="ml-2 flex-1 w-0 truncate">Invoice</span>
                                                                 </div>
                                                                 <div className="ml-4 flex-shrink-0 flex text-fgreen-700 group-hover:text-fgreen-900 duration-500 group-hover:animate-pulse">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M9.31 6.71c-.39.39-.39 1.02 0 1.41L13.19 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.72 6.7c-.38-.38-1.02-.38-1.41.01z" /></svg>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M5 13h11.17l-4.88 4.88c-.39.39-.39 1.03 0 1.42.39.39 1.02.39 1.41 0l6.59-6.59c.39-.39.39-1.02 0-1.41l-6.58-6.6c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L16.17 11H5c-.55 0-1 .45-1 1s.45 1 1 1z" /></svg>
                                                                 </div>
                                                             </a>
                                                         </li>
@@ -298,17 +311,30 @@ export default function Nursery({ user, nursery, token }) {
                                                                     <span className="ml-2 flex-1 w-0 truncate">Advance Slip</span>
                                                                 </div>
                                                                 <div className="ml-4 flex-shrink-0 flex text-fgreen-700 group-hover:text-fgreen-900 duration-500 group-hover:animate-pulse">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M9.31 6.71c-.39.39-.39 1.02 0 1.41L13.19 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.72 6.7c-.38-.38-1.02-.38-1.41.01z" /></svg>
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M5 13h11.17l-4.88 4.88c-.39.39-.39 1.03 0 1.42.39.39 1.02.39 1.41 0l6.59-6.59c.39-.39.39-1.02 0-1.41l-6.58-6.6c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L16.17 11H5c-.55 0-1 .45-1 1s.45 1 1 1z" /></svg>
                                                                 </div>
                                                             </a>
                                                         </li>
                                                     </ul>
                                                 </dd>
                                             </div>
+
                                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                                 <dt className="text-sm font-medium text-gray-500"></dt>
                                                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                                     <ul role="list" className="border border-gray-200 rounded-md divide-y divide-gray-200">
+                                                        <li >
+                                                            <a onClick={() => {
+                                                                updateNursery()
+                                                            }} className="group pl-3 pr-4 py-3 flex items-center justify-between text-sm hover:bg-fgreen-200 cursor-pointer duration-500">
+                                                                <div className="w-0 flex-1 flex items-center">
+                                                                    <span className="ml-2 flex-1 w-0 truncate">UPDATE</span>
+                                                                </div>
+                                                                <div className="ml-4 flex-shrink-0 flex text-fgreen-700 group-hover:text-fgreen-900 duration-500 group-hover:animate-pulse">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M5 13h11.17l-4.88 4.88c-.39.39-.39 1.03 0 1.42.39.39 1.02.39 1.41 0l6.59-6.59c.39-.39.39-1.02 0-1.41l-6.58-6.6c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L16.17 11H5c-.55 0-1 .45-1 1s.45 1 1 1z" /></svg>
+                                                                </div>
+                                                            </a>
+                                                        </li>
                                                         <li >
                                                             <a onClick={() => {
                                                                 deleteNursery()
@@ -316,7 +342,7 @@ export default function Nursery({ user, nursery, token }) {
                                                                 <div className="w-0 flex-1 flex items-center">
                                                                     <span className="ml-2 flex-1 w-0 truncate">DELETE</span>
                                                                 </div>
-                                                                <div className="ml-4 flex-shrink-0 flex text-red-700 group-hover:text-red-900 duration-500 group-hover:animate-pulse">
+                                                                <div className="ml-4 flex-shrink-0 flex text-red-700 group-hover:text-red-900 duration-500 group-hover:animate-scale">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" /></svg>
                                                                 </div>
                                                             </a>
