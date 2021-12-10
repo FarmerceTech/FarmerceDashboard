@@ -151,6 +151,18 @@ export default function Nursery({ user, nursery, token }) {
                                                 <dt className="text-sm font-medium text-gray-500">Nursery Name</dt>
                                                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 capitalize">{nursery.name}</dd>
                                             </div>
+                                            {/* <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                                <dt className="text-sm font-medium text-gray-500">Nursery Name</dt>
+                                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 capitalize">
+                                                    <input
+                                                        defaultValue={nursery.name}
+                                                        id="name"
+                                                        name="name"
+                                                        type='text'
+                                                        className="rounded-full bg-gray-100 px-4 py-2 pr-14 text-sm w-full outline-none border focus:border-fgreen-700 duration-500"
+                                                    />
+                                                </dd>
+                                            </div> */}
                                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                                 <dt className="text-sm font-medium text-gray-500">Nursery Type</dt>
                                                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{getNurseryType(nursery.type)}</dd>
@@ -221,7 +233,7 @@ export default function Nursery({ user, nursery, token }) {
                                                 </dd>
                                             </div>
                                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                                <dt className="text-sm font-medium text-gray-500">Admin Details</dt>
+                                                <dt className="text-sm font-medium text-gray-500">Nursery Owner Details</dt>
                                                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                                                     <ul role="list" className="border border-gray-200 rounded-md divide-y divide-gray-200">
                                                         <li className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
@@ -254,7 +266,7 @@ export default function Nursery({ user, nursery, token }) {
                                                             <Link href={{ pathname: '/admin/' + nursery.admin.uId }}>
                                                                 <a className="group pl-3 pr-4 py-3 flex items-center justify-between text-sm hover:bg-gray-200 cursor-pointer duration-500">
                                                                     <div className="w-0 flex-1 flex items-center">
-                                                                        <span className="ml-2 flex-1 w-0 truncate font-medium text-fgreen-700 group-hover:text-fgreen-900 duration-500">View Admin</span>
+                                                                        <span className="ml-2 flex-1 w-0 truncate font-medium text-fgreen-700 group-hover:text-fgreen-900 duration-500">View Nursery Owner</span>
                                                                     </div>
                                                                     <div className="ml-4 flex-shrink-0 flex text-fgreen-700 group-hover:text-fgreen-900 duration-500 group-hover:animate-pulse">
                                                                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M9.31 6.71c-.39.39-.39 1.02 0 1.41L13.19 12l-3.88 3.88c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41L10.72 6.7c-.38-.38-1.02-.38-1.41.01z" /></svg>
@@ -265,7 +277,6 @@ export default function Nursery({ user, nursery, token }) {
                                                     </ul>
                                                 </dd>
                                             </div>
-
                                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                                 <dt className="text-sm font-medium text-gray-500">Bills</dt>
                                                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
@@ -294,7 +305,6 @@ export default function Nursery({ user, nursery, token }) {
                                                     </ul>
                                                 </dd>
                                             </div>
-
                                             <div className="py-4 sm:py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                                 <dt className="text-sm font-medium text-gray-500"></dt>
                                                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">

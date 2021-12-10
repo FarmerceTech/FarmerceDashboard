@@ -33,7 +33,7 @@ export default function Nursery({ nurseries, totalPages, size, totalItems, pageN
     return (
         <>
 
-            <MetaLayout title="Nursery List" description={"Page Number " + pageNumber} />
+            <MetaLayout title="Nurseries" description={"Page Number " + pageNumber} />
             <div>
 
                 <NavigationLayout index="2" sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
@@ -107,7 +107,7 @@ export default function Nursery({ nurseries, totalPages, size, totalItems, pageN
                     <main>
                         <div className="py-6">
                             <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-                                <h1 className="text-2xl font-semibold text-gray-900">Nursery List</h1>
+                                <h1 className="text-2xl font-semibold text-gray-900">Nurseries</h1>
                             </div>
                             <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                                 {/* Replace with your content */}
@@ -200,7 +200,7 @@ export default function Nursery({ nurseries, totalPages, size, totalItems, pageN
                                             </Link> : <></>
                                     }
                                     <div className="self-center">
-                                        {pageNumber + ' of ' + totalPages}
+                                        {pageNumber + ' of ' + totalPages + ' (' + nurseries.length + ' of ' + totalItems + ')'}
                                     </div>
                                     {
                                         (parseInt(pageNumber) + 1) <= totalPages ?
